@@ -27,7 +27,9 @@ module.exports = function() {
         secret: config.sessionSecret
     }));
 
-    app.set('views', './app/views');
+    app.set('views', '../app/views');
+    app.engine('html', require('ejs').renderFile);
+    app.set('view engine', 'html');
 
     require('../app/routes/index.server.routes.js')(app);
     require('../app/routes/album.server.routes.js')(app);
