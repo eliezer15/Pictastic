@@ -30,9 +30,9 @@ module.exports = function() {
     app.set('views', './app/views');
 
     require('../app/routes/index.server.routes.js')(app);
-    //require('../app/routes/albums.server.routes.js')(app);
+    require('../app/routes/album.server.routes.js')(app);
 
     app.use(express.static('./public'));
 
     return app;
-}
+};

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var PictureSchema = new mongoose.Schema ({
-    name: {
+    title: {
         type: String,
         required: true
     },
