@@ -6,12 +6,10 @@ var PictureSchema = new mongoose.Schema ({
         required: true
     },
     sizeInKb: {
-        type: String,
-        required: true
+        type: String
     },
-    s3Key: {
-        type: String,
-        required: true
+    keyPrefix: {
+        type: String
     },
     album: {
         type: mongoose.Schema.ObjectId,
