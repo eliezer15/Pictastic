@@ -1,20 +1,23 @@
 var mongoose = require('mongoose');
 
-var PictureSchema = new mongoose.Schema ({
+var PictureSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
     },
     sizeInKb: {
-        type: String
+        type: String,
+        required: true
     },
-    keyPrefix: {
-        type: String
+    url: {
+        type: String,
+        required: true
     },
     album: {
         type: mongoose.Schema.ObjectId,
-        ref: 'Album'
+        ref: 'Album',
+        required: true
     }
-});
+}, {timestamps: true});
 
 mongoose.model('Picture', PictureSchema);

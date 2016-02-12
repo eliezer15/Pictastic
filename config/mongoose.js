@@ -6,5 +6,6 @@ var mongoose = require('mongoose');
 
 module.exports = function () {
     require('../app/models/album.server.model');
+    require('../app/models/picture.server.model');
     return mongoose.connect(config.db);
-}
+};

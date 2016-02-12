@@ -1,4 +1,4 @@
-var albums = require('../../app/controllers/album.server.controller');
+var albums = require('../controllers/albums.server.controller.js');
 
 module.exports = function(app) {
     app.route('/albums')
