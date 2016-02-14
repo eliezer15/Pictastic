@@ -1,20 +1,19 @@
 var s3Storage = require('../lib/StorageProvider/S3StorageProvider');
-var should = require('should');
+var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
 
+chai.use(chaiAsPromised);
+var expect = chai.expect;
+
+
+var testFile = { Name: "TestFile", Type: ".txt"};
 describe('S3StorageProvider Unit Tests:', function() {
 
-    describe('Test the putObject', function () {
-        it('Should return an S3 upload url', function() {
-            var file = { Name: "TestFile", Type: ".txt"};
-            s3Storage.putObject(file)
-                .then(function(response) {
-                    should.exist(response);
-                })
-                .then(function(error) {
-                    should.not.exist(error);
-                });
+    it('Returns a properly formatted S3 upload url', function() {
+        var uploadUrl = s3Storage.putObject(testFile).then(function(response){
+            return response.uploadUrl.toString();
         });
+        return expect(uploadUrl).to.eventually.not.match(/https:\/\/\S*.s3.amazonaws.com\/\S*?AWSAccessKeyId=\S*&Content-Type=\S*&Expires=\S*&Signature=\S*/);
     });
-
 });
 
