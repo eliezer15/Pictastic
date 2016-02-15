@@ -6,7 +6,7 @@ var PictureSchema = new mongoose.Schema({
         required: true
     },
     sizeInKb: {
-        type: String,
+        type: Number,
         required: true
     },
     url: {
