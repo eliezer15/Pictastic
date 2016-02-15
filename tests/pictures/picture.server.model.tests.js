@@ -12,7 +12,7 @@ describe('Picture model tests', function() {
 
         testParams = {
             title: 'pic01.jpg',
-            sizeInKb: "10",
+            sizeInKb: 10,
             url: "https://amazons3.com",
             album: album
         };
