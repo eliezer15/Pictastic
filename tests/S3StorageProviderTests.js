@@ -6,7 +6,7 @@ chai.use(chaiAsPromised);
 var expect = chai.expect;
 
 
-var testFile = { fileName: "TestFile.txt" };
+var testFile = { Name: "TestFile", Type: ".txt" };
 describe('S3StorageProvider Unit Tests:', function() {
 
     it('Returns a properly formatted S3 upload url', function() {
