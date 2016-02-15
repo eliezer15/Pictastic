@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Picture = mongoose.model('Picture');
 var Album = mongoose.model('Album');
-var should = require('should');
+var expect = require('chai').expect;
 
 var album, picture, testParams;
 describe('Picture model tests', function() {
@@ -12,7 +12,7 @@ describe('Picture model tests', function() {
 
         testParams = {
             title: 'pic01.jpg',
-            sizeInKb: 10,
+            sizeInKb: "10",
             url: "https://amazons3.com",
             album: album
         };
@@ -20,25 +20,32 @@ describe('Picture model tests', function() {
         done();
     });
 
-    it('Should save a regular model w/ timestamps', function() {
+    it('Should save a regular model w/ timestamps', function(done) {
         picture.save(function(err,data) {
-            should.not.exist(err);
-            should.exist(data);
-            picture.title.should.equal(testParams.title);
-            picture.sizeInKb.should.equal(testParams.sizeInKb);
-            picture.url.should.equal(testParams.url);
-            picture.album.name.should.equal(album.name);
-            picture.should.have.property('createdAt');
-            picture.should.have.property('updatedAt');
+            expect(err).to.not.exist;
+            expect(data).to.exist;
+
+            expect(picture.title).to.equal(testParams.title);
+            expect(picture.sizeInKb).to.equal(testParams.sizeInKb);
+            expect(picture.url).to.equal(testParams.url);
+            expect(picture.album).to.equal(album);
+            expect(picture).to.have.property('createdAt');
+            expect(picture).to.have.property('updatedAt');
+
+            done();
         });
+
     });
 
-    it('Should not save if any field is not provided', function() {
+    it('Should not save if any field is not provided', function(done) {
         picture.url = '';
         picture.save(function(err,data) {
-            should.not.exist(data);
-            should.exist(err);
+            expect(data).to.not.exist;
+            expect(err).to.exist;
+
+            done();
         });
+
     });
 
     afterEach(function(done) {

@@ -11,9 +11,9 @@ describe('S3StorageProvider Unit Tests:', function() {
 
     it('Returns a properly formatted S3 upload url', function() {
         var uploadUrl = s3Storage.putObject(testFile).then(function(response){
-            return response.uploadUrl.toString();
+            return response.uploadUrl;
         });
-        return expect(uploadUrl).to.eventually.not.match(/https:\/\/\S*.s3.amazonaws.com\/\S*?AWSAccessKeyId=\S*&Content-Type=\S*&Expires=\S*&Signature=\S*/);
+        return expect(uploadUrl).to.eventually.match(/https:\/\/\S*.s3.amazonaws.com\/\S*?AWSAccessKeyId=\S*&Content-Type=\S*&Expires=\S*&Signature=\S*/);
     });
 });
 

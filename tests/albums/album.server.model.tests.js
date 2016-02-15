@@ -1,27 +1,32 @@
 var Album = require('mongoose').model('Album');
-var should = require('should');
+var expect = require('chai').expect;
 
 var testParams = { name: 'Test-Album'};
 
 describe('Album model tests', function() {
-    it('Should save a regular model w/ timestamps', function() {
+    it('Should save a regular model w/ timestamps', function(done) {
         var theAlbum = new Album(testParams);
         theAlbum.save(function(err,data) {
-            should.not.exist(err);
-            should.exist(data);
-            theAlbum.name.should.equal(testParams.name);
-            theAlbum.should.have.property('createdAt');
-            theAlbum.should.have.property('updatedAt');
+            expect(err).to.not.exist;
+            expect(data).to.exist;
+            expect(theAlbum.name).to.equal(testParams.name);
+            expect(theAlbum).to.have.property('createdAt');
+            expect(theAlbum).to.have.property('updatedAt');
+
+            done();
         });
     });
 
-    it('Should not save if no name is provided', function() {
+    it('Should not save if no name is provided', function(done) {
         var params =  {};
         var theAlbum = new Album(params);
         theAlbum.save(function(err,data) {
-            should.not.exist(data);
-            should.exist(err);
+            expect(data).to.not.exist;
+            expect(err).to.exist;
+
+            done();
         });
+
     });
 
     afterEach(function(done) {
