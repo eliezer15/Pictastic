@@ -5,6 +5,7 @@
     "aws-sdk": "^2.2.32",
     "body-parser": "^1.14.2",
     "compression": "^1.6.1",
+    "ejs": "^2.4.1",
     "express": "^4.8.8",
     "express-session": "*",
     "method-override": "*",

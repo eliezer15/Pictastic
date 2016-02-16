@@ -7,7 +7,7 @@ exports.upload = function(req, res, next) {
     storage.putObject(req.body)
         .then(function(data) {
             var tempParams = {
-                title: req.body.fileName,
+                title: req.body.name,
                 album: req.album.id,
                 uploadUrl: data.uploadUrl
             };
