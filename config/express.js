@@ -5,6 +5,7 @@ var compress = require('compression');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var session = require('express-session');
+var multer = require('multer');
 
 module.exports = function() {
     var app = express();
