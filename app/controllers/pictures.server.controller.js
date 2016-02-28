@@ -1,16 +1,15 @@
 var Picture = require('mongoose').model('Picture');
-var TempPicture = require('mongoose').model('TempPicture');
 var storage = require('../../lib/StorageProvider/S3StorageProvider');
 
 exports.upload = function(req, res, next) {
     //Validation
-    var file1 = req.file;
+    var fileToUpload = req.file;
 
-    storage.putObject(file1)
+    storage.putObject(fileToUpload)
         .then(function(data) {
-            console.log(data);
-            res.json(data);
-            //TODO: Create actual pic model
+            var fileMetadata = storage.getObjectMetadata(data.key);
+            var pictureModel = new Picture();
+            //TODO: Fill out rest of the object, save, and return
         }, function(error) {
             next(error);
         });
