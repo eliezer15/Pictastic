@@ -5,12 +5,23 @@ exports.upload = function(req, res, next) {
     //Validation
     var fileToUpload = req.file;
 
-    storage.putObject(fileToUpload)
-        .then(function(data) {
-            var fileMetadata = storage.getObjectMetadata(data.key);
-            var pictureModel = new Picture();
-            //TODO: Fill out rest of the object, save, and return
-        }, function(error) {
-            next(error);
+    storage.upload(req.album, fileToUpload)
+        .then(createPicture)
+        .then(function(model) {
+            res.json(model);
         });
 };
+
+function createPicture(picture) {
+    return new Promise(function (resolve, reject) {
+        var pictureModel = new Picture(picture);
+        pictureModel.save(function (err) {
+            if (err) {
+                reject(Error(err));
+            }
+            else {
+                resolve(pictureModel);
+            }
+        });
+    });
+}
